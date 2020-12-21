@@ -1,0 +1,22 @@
+.error-message{
+   color: red;
+}
+.center {
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+ }
+.button-row .mat-button-base {
+   margin: 8px 8px 8px 0;
+ }
+::ng-deep .mat-horizontal-content-container {
+   overflow: hidden !important;
+   padding: 0px !important;
+}
+form ion-label.required:after
+{
+    color: red;
+    content: " *";
+}

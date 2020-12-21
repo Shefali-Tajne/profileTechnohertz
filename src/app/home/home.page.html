@@ -1,0 +1,182 @@
+<ion-header>
+   <ion-toolbar>
+     <ion-title>Profile</ion-title>
+   </ion-toolbar>
+ </ion-header>
+<ion-content>
+   <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="slideOneForm">
+        <ion-card>
+            <form [formGroup]="slideOneForm">
+                  <ion-item>
+                     <ion-label position="floating" class="required">First Name</ion-label>
+                     <ion-input  type="text" formControlName="firstName"></ion-input>
+                  </ion-item>
+                  <div *ngFor="let error of errorMessages.firstName">
+                     <ng-container *ngIf="firstName.hasError(error.type) && (firstName.dirty || firstName.touched)">
+                       <small class="error-message">{{error.message}}</small>
+                     </ng-container>
+                   </div>
+                  <ion-item lines="full">
+                     <ion-label position="floating" class="required">Last Name</ion-label>
+                     <ion-input  type="text" formControlName="lastName" maxlength="30"></ion-input  >
+                  </ion-item>
+                  <div *ngFor="let error of errorMessages.lastName">
+                     <ng-container *ngIf="lastName.hasError(error.type) && (lastName.dirty || lastName.touched)">
+                       <small class="error-message">{{error.message}}</small>
+                     </ng-container>
+                   </div>
+                  <ion-item lines="full">
+                     <ion-label class="required" >Gender</ion-label>
+                     <ion-select formControlName="gender" >
+                        <ion-select-option>male</ion-select-option>
+                        <ion-select-option>Female</ion-select-option>
+                        <ion-select-option>Others</ion-select-option>
+                     </ion-select>
+                  </ion-item>
+                  <div *ngFor="let error of errorMessages.gender">
+                     <ng-container *ngIf="gender.hasError(error.type) && (gender.dirty || gender.touched)">
+                       <small class="error-message">{{error.message}}</small>
+                     </ng-container>
+                   </div>
+
+                  <ion-item lines="full">
+                     <ion-label position="floating" class="required">Mobile Number</ion-label>
+                     <ion-input type="number" formControlName="mobile"></ion-input>
+                  </ion-item>
+                  <div *ngFor="let error of errorMessages.mobile">
+                     <ng-container *ngIf="mobile.hasError(error.type) && (mobile.dirty || mobile.touched)">
+                       <small class="error-message">{{error.message}}</small>
+                     </ng-container>
+                   </div>
+            </form>
+         </ion-card>
+         <div class="center button-row">
+            <button mat-raised-button matStepperNext color="primary" [disabled]="slideOneForm.invalid">Next<ion-icon name="arrow-forward"></ion-icon></button>
+          </div>
+      </mat-step>
+      <mat-step [stepControl]="slideTwoForm">
+         <ion-card>
+            <form [formGroup]="slideTwoForm">
+               <ion-item>
+                  <ion-label position="floating" class="required">Email</ion-label>
+                  <ion-input type="email" formControlName="email"></ion-input>
+               </ion-item>
+               <div *ngFor="let error of errorMessages.email">
+                  <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </div>
+               <ion-item> 
+                     <ion-label position="floating" class="required">Password</ion-label>
+                     <ion-input type="text" formControlName="password"></ion-input>
+               </ion-item>
+               <div *ngFor="let error of errorMessages.password">
+                  <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </div>
+               <ion-item>
+                  <ion-label position="floating" class="required">City</ion-label>
+                  <ion-input type="text" formControlName="city"></ion-input>
+               </ion-item>
+               <div *ngFor="let error of errorMessages.city">
+                  <ng-container *ngIf="city.hasError(error.type) && (city.dirty || city.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </div>
+               <ion-item>
+                  <ion-label position="floating" class="required">Address</ion-label>
+                  <ion-input type="text"formControlName="address" ></ion-input>
+               </ion-item>
+               <div *ngFor="let error of errorMessages.address">
+                  <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </div>
+               <ion-item>
+                  <ion-label position="floating" class="required">Pincode</ion-label>
+                  <ion-input type="text" formControlName="zip"></ion-input>
+               </ion-item>
+               <div *ngFor="let error of errorMessages.zip">
+                  <ng-container *ngIf="zip.hasError(error.type) && (zip.dirty || zip.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </div>
+            </form>
+         </ion-card>
+         <div class="center button-row">
+            <button mat-raised-button matStepperPrevious color="primary"><ion-icon name="arrow-back"></ion-icon> Back</button>
+            <button mat-raised-button matStepperNext color="primary" [disabled]="slideTwoForm.invalid">Next<ion-icon name="arrow-forward"></ion-icon></button>
+          </div>
+      </mat-step>
+      <mat-step [stepControl]="slideThreeForm">
+         <ion-card>
+            <form [formGroup]="slideThreeForm">
+                <ion-grid>
+                  <ion-row>
+                     <ion-col col-12 class="hidden-md">
+                        <ion-label position="floating" class="required">Upload Photo</ion-label><br>
+                        <img height="100px" width="100px" [src]="_d.bypassSecurityTrustResourceUrl(uploadphoto)">
+                           <ion-input type="file" (change)="fileChange($event)" formControlName="uploadPhoto" accept="image/x-png,image/jpg,image/jpeg"></ion-input>
+                           <div *ngFor="let error of errorMessages.uploadPhoto">
+                           <ng-container *ngIf="uploadPhoto.hasError(error.type) && (uploadPhoto.dirty || uploadPhoto.touched)">
+                              <small class="error-message">{{error.message}}</small>
+                           </ng-container>
+                        </div>
+                     </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-item-divider></ion-item-divider>
+                <ion-grid>
+                  <ion-row>
+                     <ion-col col-12 class="hidden-md">
+                        <ion-label position="floating" class="required">Upload Signature</ion-label><br>
+                        <img height="100px" width="100px" [src]="_d.bypassSecurityTrustResourceUrl(uploadsig)">
+                        <ion-input type="file" (change)="fileChangeSig($event)" formControlName="uploadSig" accept="image/x-png,image/jpg,image/jpeg"></ion-input>
+                        <div *ngFor="let error of errorMessages.uploadSig">
+                           <ng-container *ngIf="uploadSig.hasError(error.type) && (uploadSig.dirty || uploadSig.touched)">
+                              <small class="error-message">{{error.message}}</small>
+                           </ng-container>
+                        </div>
+                     </ion-col>
+                  </ion-row>
+               </ion-grid>
+               <ion-item-divider></ion-item-divider>
+               <ion-grid>
+                  <ion-row>
+                     <ion-col col-6 class="hidden-md">
+                        <ion-label position="floating" class="required">Upload Resume</ion-label><br>
+                        <ion-input type="file" (change)="fileChangeResume($event)" formControlName="uploadResume" accept=".pdf,.docx"></ion-input>
+                        <div *ngFor="let error of errorMessages.uploadResume">
+                           <ng-container *ngIf="uploadResume.hasError(error.type) && (uploadResume.dirty || uploadResume.touched)">
+                              <small class="error-message">{{error.message}}</small>
+                           </ng-container>
+                        </div>
+                     </ion-col>
+                  </ion-row>
+               </ion-grid>
+               <ion-item-divider></ion-item-divider>
+               <ion-grid>
+                  <ion-row>
+                     <ion-col>
+                        <div #recaptcha ></div>
+                     </ion-col>
+                  </ion-row>
+               </ion-grid>
+                 
+                  
+                           
+               
+            </form>
+         </ion-card>
+            <div class="center button-row" color="primary">
+               
+                  <button mat-raised-button matStepperPrevious color="primary" ><ion-icon name="arrow-back"></ion-icon> Back</button>
+                  <button mat-raised-button (click)="stepper.reset()" color="primary">Reset</button>
+                  <button mat-raised-button (click)="submitForm()" color="primary" [disabled]="slideThreeForm.invalid">Submit</button>
+               
+            </div>
+      </mat-step>
+   </mat-horizontal-stepper>
+</ion-content> 
